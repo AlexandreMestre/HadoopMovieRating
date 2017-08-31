@@ -56,55 +56,20 @@ public class WordCountSec {
             
             double r1 = 0.0;
             double r2 = 0.0;
-            /*
-            for (Text rating : values) {
-                String[] ratings = rating.toString().split(";");
-                
-                if (ratings.length > 1){
-                    r1 = Double.parseDouble(ratings[0]);
-                    r2 = Double.parseDouble(ratings[1]);
-                    
-                    sum_xx += r1 * r1;
-                    sum_yy += r2 * r2;
-                    sum_xy += r1 * r2;
-                    sum_y += r2;
-                    sum_x += r1;
-                    n += 1;
-                }
-            }
-            
-            double numerador = (n*sum_xy - sum_x*sum_y);
-            double denominador = Math.sqrt(n*sum_xx - (sum_x*sum_x)) * Math.sqrt(n*sum_yy - (sum_y*sum_y));
-            if (denominador == 0) {
-                correlation = 0.0;
-            }else {
-                correlation = numerador / denominador;
-            }
-            correlation = (correlation + 1)/2;
-            
-            
-            */
-            
-            double sum_x_y = 0;
+            double aux = 0;
             
             for (Text rating : values) {
-                String[] ratings = rating.toString().split(";");
+                String[] ratings = rating.toString().split(",");
                 
-                if (ratings.length > 1){
-                    r1 = Double.parseDouble(ratings[0]);
-                    r2 = Double.parseDouble(ratings[1]);
-                    
-                    sum_x_y += Math.pow((r1-r2),2);
-                    n += 1;
-                }
+                n += Double.parseDouble(ratings[0]);
+                aux += Double.parseDouble(ratings[1]);
+                
             }
             
-            correlation = 1 - sum_x_y/(25*n);
-            
+            correlation = aux / (25*n);
+
             String out = ""+correlation;
-            if (n >= 20) {
-                context.write(key, new Text(out));
-            }
+            context.write(key, new Text(out));
         }
     }
     
