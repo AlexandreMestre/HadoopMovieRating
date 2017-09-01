@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.lib.jobcontrol.*;
 
 import jdk.nashorn.internal.runtime.Context;
 
-public class WordCountSec {
+public class RatingSec {
     
     
     public static class CombinationMapper
@@ -76,8 +76,8 @@ public class WordCountSec {
     
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "word count");
-        job.setJarByClass(WordCountSec.class);
+        Job job = Job.getInstance(conf, "rating");
+        job.setJarByClass(RatingSec.class);
         job.setMapperClass(CombinationMapper.class);
         //job.setCombinerClass(FinalReducer.class);
         job.setReducerClass(FinalReducer.class);
