@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.lib.jobcontrol.*;
 
 import jdk.nashorn.internal.runtime.Context;
 
-public class WordCountFirst {
+public class RatingFirst {
     
     public static class TokenizerMapper
     extends Mapper<Object, Text, Text, Text>{
@@ -46,8 +46,8 @@ public class WordCountFirst {
     
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "word count");
-        job.setJarByClass(WordCountFirst.class);
+        Job job = Job.getInstance(conf, "rating");
+        job.setJarByClass(RatingFirst.class);
         job.setMapperClass(TokenizerMapper.class);
         job.setCombinerClass(UserRatingReducer.class);
         job.setReducerClass(UserRatingReducer.class);
